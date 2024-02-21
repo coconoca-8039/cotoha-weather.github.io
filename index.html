@@ -1,37 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
-    <title>This is the Test Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>グラフのレイアウト</title>
     <style>
         body {
-            background-color: #f0f0f0; /* 背景色を変更したい場合はこの値を変えてください */
+            background-color: #f0f0f0; /* ここで背景色を変更できます */
             margin: 0;
             padding: 0;
             display: flex;
             flex-wrap: wrap;
-            justify-content: center;
+            justify-content: space-around;
+            align-items: flex-start;
         }
-        .image-container {
-            flex: 1 0 21%; /* 画像のサイズとタイルの間隔を調整 */
+        .graph-container {
             margin: 10px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-        .image-container img {
-            width: 100%;
+        .graph-container img {
+            width: 100%; /* レスポンシブにするために幅を100%に設定 */
             height: auto;
-            display: block;
+            display: block; /* 画像の縦横比を保持 */
         }
         @media (max-width: 600px) {
-            .image-container {
-                flex: 1 0 46%; /* スマホ画面では画像を大きく表示 */
+            .graph-container {
+                flex-basis: 100%; /* スマホ表示では1列に */
             }
         }
     </style>
 </head>
 <body>
-    <div class="image-container"><img src="image1.jpg" alt="Image 1"></div>
-    <div class="image-container"><img src="image2.jpg" alt="Image 2"></div>
-    <div class="image-container"><img src="image3.jpg" alt="Image 3"></div>
-    <div class="image-container"><img src="image4.jpg" alt="Image 4"></div>
+    <div class="graph-container">
+        <img src="image1.jpg" alt="総売上">
+    </div>
+    <div class="graph-container">
+        <img src="image2.jpg" alt="純利益">
+    </div>
+    <div class="graph-container">
+        <img src="image3.jpg" alt="費用">
+    </div>
+    <div class="graph-container">
+        <img src="image4.jpg" alt="利益率">
+    </div>
 </body>
 </html>
