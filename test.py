@@ -1,5 +1,8 @@
 import sqlite3
 
+# このファイルからhtmlに対してwrite処理をする
+# その後は、別に作るシェルファイルでcommitをする
+
 def fetch_recent_data(db_path, table_name, column_name):
 	
 	# SQLiteデータベースに接続
@@ -31,11 +34,19 @@ column_pressure = "Pressure"
 column_satelliteCount = "SatelliteCount"
 
 tempture = fetch_recent_data(db_path, table_name, column_tempture)
+tempture_disp = round(sum(tempture) / len(tempture), 2)
+
 humidity = fetch_recent_data(db_path, table_name, column_humidity)
+humidity_disp = round(sum(humidity) / len(humidity), 2)
+
 pressure = fetch_recent_data(db_path, table_name, column_pressure)
+pressure_disp = round(sum(pressure) / len(pressure), 2)
+
 satellite_count = fetch_recent_data(db_path, table_name, column_satelliteCount)
+satellite_count_disp = round(sum(satellite_count) / len(satellite_count), 2)
 
 print(f"気温：{round(sum(tempture) / len(tempture), 2)}")
 print(f"湿度：{round(sum(humidity) / len(humidity), 2)}")
 print(f"気圧：{round(sum(pressure) / len(pressure), 2)}")
 print(f"衛星：{round(sum(satellite_count) / len(satellite_count), 2)}")
+
