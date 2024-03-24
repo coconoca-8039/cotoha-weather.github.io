@@ -35,15 +35,32 @@ column_satelliteCount = "SatelliteCount"
 
 tempture = fetch_recent_data(db_path, table_name, column_tempture)
 tempture_disp = round(sum(tempture) / len(tempture), 2)
+tempture_disp = f"気温：{tempture_disp}"
 
 humidity = fetch_recent_data(db_path, table_name, column_humidity)
 humidity_disp = round(sum(humidity) / len(humidity), 2)
+humidity_disp = f"湿度：{humidity_disp}"
 
 pressure = fetch_recent_data(db_path, table_name, column_pressure)
 pressure_disp = round(sum(pressure) / len(pressure), 2)
+pressure_disp = f"気圧：{pressure_disp}"
 
 satellite_count = fetch_recent_data(db_path, table_name, column_satelliteCount)
 satellite_count_disp = round(sum(satellite_count) / len(satellite_count), 2)
+satellite_count_disp = f"衛星：{satellite_count_disp}"
+
+# htmlの書き換え
+html_file_path = "index.html"
+with open(html_file_path, "r") as file:
+	html_content = file.read()
+
+html_content = html_content.replace("{placeholder1}", tempture_disp)
+html_content = html_content.replace("{placeholder2}", humidity_disp)
+html_content = html_content.replace("{placeholder3}", pressure_disp)
+html_content = html_content.replace("{placeholder4}", satellite_count_disp)
+
+with open(html_file_path, "w") as file:
+	file.write(html_content)
 
 print(f"気温：{round(sum(tempture) / len(tempture), 2)}")
 print(f"湿度：{round(sum(humidity) / len(humidity), 2)}")
