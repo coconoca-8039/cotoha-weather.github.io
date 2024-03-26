@@ -1,4 +1,5 @@
 import sqlite3
+from datetime import datetime
 
 # このファイルからhtmlに対してwrite処理をする
 # その後は、別に作るシェルファイルでcommitをする
@@ -54,11 +55,14 @@ html_file_path = "index.html"
 with open(html_file_path, "r") as file:
 	html_content = file.read()
 
-# placeholderだと2回め以降で置換できない
 html_content = html_content.replace("{placeholder1}", tempture_disp)
 html_content = html_content.replace("{placeholder2}", humidity_disp)
 html_content = html_content.replace("{placeholder3}", pressure_disp)
 html_content = html_content.replace("{placeholder4}", satellite_count_disp)
+current_time = datetime.now()
+update_time = current_time.strftime("%H:%M")
+update_message = f"Last updated at {update_time}"
+html_content = html_content.replace("{placeholder5}", update_message)
 
 with open(html_file_path, "w") as file:
 	file.write(html_content)
