@@ -12,7 +12,7 @@ def fetch_recent_data(db_path, table_name, column_name):
 	
 	# 最新データを参照
 	# query = f"SELECT * FROM {table_name} ORDER BY Timestamp DESC LIMIT {limit}"
-	query = f"SELECT {column_name} FROM {table_name} ORDER BY rowid DESC LIMIT 10"
+	query = f"SELECT {column_name} FROM {table_name} ORDER BY rowid DESC LIMIT 1"
 	cursor.execute(query)
 	
 	# 結果をリストに格納
