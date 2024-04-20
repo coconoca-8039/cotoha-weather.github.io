@@ -20,7 +20,7 @@ def fetch_recent_data(db_path, table_name, column_name):
 	
 	# 最新データを参照
 	# query = f"SELECT * FROM {table_name} ORDER BY Timestamp DESC LIMIT {limit}"
-	query = f"SELECT {column_name} FROM {table_name} ORDER BY rowid DESC LIMIT 72"
+	query = f"SELECT {column_name} FROM {table_name} ORDER BY rowid DESC LIMIT 96"
 	cursor.execute(query)
 	
 	# 結果をリストに格納
@@ -39,10 +39,10 @@ def fetch_recent_data(db_path, table_name, column_name):
 	return data_list
 	
 plt.figure(figsize=(10, 10))
-plt.rcParams.update({'font.size':10})	
+plt.rcParams.update({'font.size':15})	
 
+# 気温グラフの作成
 tempture = fetch_recent_data(db_path, table_name, column_tempture)
-
 new_timestamp = []
 timestamp = fetch_recent_data(db_path, table_name, column_timestamp)
 for date_str in timestamp:
@@ -60,7 +60,7 @@ plt.ylabel('temperature')
 plt.savefig('/home/pi/Desktop/cotoha/cotoha-weather.github.io/image1.jpg')
 plt.clf()
 
-
+# 湿度グラフの作成
 x = new_timestamp
 humidity = fetch_recent_data(db_path, table_name, column_humidity)
 y = humidity
@@ -71,7 +71,7 @@ plt.ylabel('humidity')
 plt.savefig('/home/pi/Desktop/cotoha/cotoha-weather.github.io/image2.jpg')
 plt.clf()
 
-
+# 気圧グラフの作成
 x = new_timestamp
 pressure = fetch_recent_data(db_path, table_name, column_pressure)
 y = pressure
@@ -82,7 +82,7 @@ plt.ylabel('pressure')
 plt.savefig('/home/pi/Desktop/cotoha/cotoha-weather.github.io/image3.jpg')
 plt.clf()
 
-
+# 人工衛星の捕捉数グラフの作成
 x = new_timestamp
 satellite_count = fetch_recent_data(db_path, table_name, column_satelliteCount)
 y = satellite_count
