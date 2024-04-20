@@ -59,10 +59,14 @@ html_content = html_content.replace("{placeholder1}", tempture_disp)
 html_content = html_content.replace("{placeholder2}", humidity_disp)
 html_content = html_content.replace("{placeholder3}", pressure_disp)
 html_content = html_content.replace("{placeholder4}", satellite_count_disp)
+
 current_time = datetime.now()
 update_time = current_time.strftime("%H:%M")
 update_message = f"Last updated at {update_time}"
 html_content = html_content.replace("{placeholder5}", update_message)
+
+version = datetime.now().strftime('%m%d')
+html_content = html_content.replace("{version}", version)
 
 with open(html_file_path, "w") as file:
 	file.write(html_content)
