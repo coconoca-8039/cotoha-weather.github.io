@@ -8,7 +8,7 @@ plt.figure(figsize=(10, 10))
 
 x = [1, 2, 3, 4, 5, 6, 7]
 y = [1, 4, 9, 16, 25, 36, 49]
-plt.plot(x,y)
+plt.plot(y, x)
 plt.savefig('/home/pi/Desktop/cotoha/cotoha-weather.github.io/image1.jpg')
 
 x = [1, 2, 3, 4, 5, 6, 7]
