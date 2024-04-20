@@ -55,8 +55,8 @@ y = tempture
 plt.title('temperature')
 plt.plot(x, y)
 plt.xticks(rotation=20)
-plt.xlabel('date')
 plt.ylabel('temperature')
+plt.grid(True)
 plt.savefig('/home/pi/Desktop/cotoha/cotoha-weather.github.io/image1.jpg')
 plt.clf()
 
@@ -67,8 +67,8 @@ y = humidity
 plt.title('humidity')
 plt.plot(x,y)
 plt.xticks(rotation=20)
-plt.xlabel('date')
 plt.ylabel('humidity')
+plt.grid(True)
 plt.savefig('/home/pi/Desktop/cotoha/cotoha-weather.github.io/image2.jpg')
 plt.clf()
 
@@ -79,8 +79,8 @@ y = pressure
 plt.title('pressure')
 plt.plot(x,y)
 plt.xticks(rotation=20)
-plt.xlabel('date')
 plt.ylabel('pressure')
+plt.grid(True)
 plt.savefig('/home/pi/Desktop/cotoha/cotoha-weather.github.io/image3.jpg')
 plt.clf()
 
@@ -91,8 +91,8 @@ y = satellite_count
 plt.title('satellite_count')
 plt.plot(x,y)
 plt.xticks(rotation=20)
-plt.xlabel('date')
 plt.ylabel('satellite_count')
+plt.grid(True)
 plt.savefig('/home/pi/Desktop/cotoha/cotoha-weather.github.io/image4.jpg')
 plt.clf()
 
