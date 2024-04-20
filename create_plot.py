@@ -7,4 +7,5 @@ print("kotoha")
 x = [1, 2, 3, 4, 5]
 y = [1, 4, 9, 16, 25]
 plt.plot(x,y)
+plt.savefig('/home/pi/Desktop/cotoha/cotoha-weather.github.io/image1.jpg')
 plt.show()
