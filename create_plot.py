@@ -20,7 +20,7 @@ def fetch_recent_data(db_path, table_name, column_name):
 	
 	# 最新データを参照
 	# query = f"SELECT * FROM {table_name} ORDER BY Timestamp DESC LIMIT {limit}"
-	query = f"SELECT {column_name} FROM {table_name} ORDER BY rowid DESC LIMIT 96"
+	query = f"SELECT {column_name} FROM {table_name} ORDER BY rowid DESC LIMIT 168"
 	cursor.execute(query)
 	
 	# 結果をリストに格納
@@ -72,8 +72,8 @@ for i, date in enumerate(x):
 	else:
 		pm_x.append(date)
 		pm_y.append(y[i])
-plt.scatter(am_x, am_y, color='orange', marker='o', label='AM')
-plt.scatter(pm_x, pm_y, color='blue', marker='o', label='PM')
+plt.scatter(am_x, am_y, color='chocolate', marker='o', label='AM')
+plt.scatter(pm_x, pm_y, color='indigo', marker='o', label='PM')
 # plt.legend()
 plt.savefig('/home/pi/Desktop/cotoha/cotoha-weather.github.io/image1.jpg')
 plt.clf()
