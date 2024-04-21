@@ -3,6 +3,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import sqlite3
 from datetime import datetime
+import japanize_matplotlib
+import seaborn as sns
 
 db_path = "/home/pi/Desktop/rasp-project/ClimateData.db"
 table_name = "ClimateData"
@@ -37,9 +39,12 @@ def fetch_recent_data(db_path, table_name, column_name):
 	con.close()
 	
 	return data_list
-	
+
+sns.set()
+
 plt.figure(figsize=(10, 10))
 plt.rcParams.update({'font.size':15})	
+plt.tight_layout()
 
 # 気温グラフの作成
 tempture = fetch_recent_data(db_path, table_name, column_tempture)
