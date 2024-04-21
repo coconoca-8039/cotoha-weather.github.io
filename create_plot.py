@@ -53,14 +53,28 @@ for date_str in timestamp:
 x = new_timestamp
 y = tempture
 plt.title('temperature')
-plt.plot(x, y, 
-	marker='o', 
-	linestyle='None',
-	markerfacecolor='red',
-	markeredgecolor='red')
 plt.xticks(rotation=20)
 plt.ylabel('temperature')
 plt.grid(True)
+# plt.plot(x, y, 
+	# marker='o', 
+	# linestyle='None',
+	# markerfacecolor='red',
+	# markeredgecolor='red')
+am_x = []
+am_y = []
+pm_x = []
+pm_y = []
+for i, date in enumerate(x):
+	if date.hour < 12:
+		am_x.append(date)
+		am_y.append(y[i])
+	else:
+		pm_x.append(date)
+		pm_y.append(y[i])
+plt.scatter(am_x, am_y, color='orange', marker='o', label='AM')
+plt.scatter(pm_x, pm_y, color='blue', marker='o', label='PM')
+plt.legend()
 plt.savefig('/home/pi/Desktop/cotoha/cotoha-weather.github.io/image1.jpg')
 plt.clf()
 print('created image1')
