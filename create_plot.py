@@ -53,12 +53,17 @@ for date_str in timestamp:
 x = new_timestamp
 y = tempture
 plt.title('temperature')
-plt.plot(x, y)
+plt.plot(x, y, 
+	marker='o', 
+	linestyle='None',
+	markerfacecolor='red',
+	markeredgecolor='red')
 plt.xticks(rotation=20)
 plt.ylabel('temperature')
 plt.grid(True)
 plt.savefig('/home/pi/Desktop/cotoha/cotoha-weather.github.io/image1.jpg')
 plt.clf()
+print('created image1')
 
 # 湿度グラフの作成
 x = new_timestamp
@@ -71,6 +76,7 @@ plt.ylabel('humidity')
 plt.grid(True)
 plt.savefig('/home/pi/Desktop/cotoha/cotoha-weather.github.io/image2.jpg')
 plt.clf()
+print('created image2')
 
 # 気圧グラフの作成
 x = new_timestamp
@@ -83,6 +89,7 @@ plt.ylabel('pressure')
 plt.grid(True)
 plt.savefig('/home/pi/Desktop/cotoha/cotoha-weather.github.io/image3.jpg')
 plt.clf()
+print('created image3')
 
 # 人工衛星の捕捉数グラフの作成
 x = new_timestamp
@@ -95,5 +102,6 @@ plt.ylabel('satellite_count')
 plt.grid(True)
 plt.savefig('/home/pi/Desktop/cotoha/cotoha-weather.github.io/image4.jpg')
 plt.clf()
+print('created image4')
 
 # plt.show()
