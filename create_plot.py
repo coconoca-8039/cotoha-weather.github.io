@@ -52,9 +52,9 @@ for date_str in timestamp:
 
 x = new_timestamp
 y = tempture
-plt.title('temperature')
+# plt.title('temperature')
 plt.xticks(rotation=20)
-plt.ylabel('temperature')
+plt.ylabel('temperature[℃]')
 plt.grid(True)
 # plt.plot(x, y, 
 	# marker='o', 
@@ -83,10 +83,10 @@ print('created image1')
 x = new_timestamp
 humidity = fetch_recent_data(db_path, table_name, column_humidity)
 y = humidity
-plt.title('humidity')
+# plt.title('humidity')
 plt.plot(x,y)
 plt.xticks(rotation=20)
-plt.ylabel('humidity')
+plt.ylabel('humidity[%]')
 plt.grid(True)
 plt.savefig('/home/pi/Desktop/cotoha/cotoha-weather.github.io/image2.jpg')
 plt.clf()
@@ -96,10 +96,10 @@ print('created image2')
 x = new_timestamp
 pressure = fetch_recent_data(db_path, table_name, column_pressure)
 y = pressure
-plt.title('pressure')
+# plt.title('pressure')
 plt.plot(x,y)
 plt.xticks(rotation=20)
-plt.ylabel('pressure')
+plt.ylabel('pressure[hPa]')
 plt.grid(True)
 plt.savefig('/home/pi/Desktop/cotoha/cotoha-weather.github.io/image3.jpg')
 plt.clf()
@@ -109,7 +109,7 @@ print('created image3')
 x = new_timestamp
 satellite_count = fetch_recent_data(db_path, table_name, column_satelliteCount)
 y = satellite_count
-plt.title('satellite_count')
+# plt.title('satellite_count')
 plt.plot(x,y)
 plt.xticks(rotation=20)
 plt.ylabel('satellite_count')
