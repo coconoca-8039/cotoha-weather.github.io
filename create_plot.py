@@ -79,7 +79,7 @@ for i, date in enumerate(x):
 		pm_y.append(y[i])
 plt.scatter(am_x, am_y, color='chocolate', marker='o', label='AM')
 plt.scatter(pm_x, pm_y, color='indigo', marker='o', label='PM')
-# plt.legend()
+plt.legend()
 plt.savefig('/home/pi/Desktop/cotoha/cotoha-weather.github.io/image1.jpg')
 plt.clf()
 print('created image1')
