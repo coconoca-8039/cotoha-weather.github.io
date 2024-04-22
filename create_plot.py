@@ -40,11 +40,10 @@ def fetch_recent_data(db_path, table_name, column_name):
 	
 	return data_list
 
-sns.set()
-
 plt.figure(figsize=(10, 10))
 plt.rcParams.update({'font.size':15})	
 plt.tight_layout()
+sns.set(style="whitegrid")
 
 # 気温グラフの作成
 tempture = fetch_recent_data(db_path, table_name, column_tempture)
