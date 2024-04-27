@@ -60,10 +60,10 @@ y = tempture
 plt.xticks(rotation=20)
 plt.ylabel('temperature[℃]')
 plt.grid(True)
-# plt.plot(x, y, 
+plt.plot(x, y, 
 	# marker='o', 
 	# linestyle='None',
-	# markerfacecolor='red',
+	markerfacecolor='red')
 	# markeredgecolor='red')
 am_x = []
 am_y = []
@@ -78,6 +78,8 @@ for i, date in enumerate(x):
 		pm_y.append(y[i])
 plt.scatter(am_x, am_y, color='chocolate', marker='o', label='AM')
 plt.scatter(pm_x, pm_y, color='indigo', marker='o', label='PM')
+ #plt.bar(am_x, am_y, color='chocolate', label='AM')
+# plt.bar(pm_x, pm_y, color='indigo', label='PM')
 plt.legend()
 plt.savefig('/home/pi/Desktop/cotoha/cotoha-weather.github.io/image1.jpg')
 plt.clf()
