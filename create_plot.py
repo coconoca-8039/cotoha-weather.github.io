@@ -43,7 +43,8 @@ def fetch_recent_data(db_path, table_name, column_name):
 plt.figure(figsize=(10, 10))
 plt.rcParams.update({'font.size':15})	
 plt.tight_layout()
-sns.set(style="whitegrid")
+# sns.set(style="whitegrid")
+sns.set()
 
 # 気温グラフの作成
 tempture = fetch_recent_data(db_path, table_name, column_tempture)
@@ -124,4 +125,38 @@ plt.savefig('/home/pi/Desktop/cotoha/cotoha-weather.github.io/image4.jpg')
 plt.clf()
 print('created image4')
 
+# 不快指数
+T = np.array(tempture)
+H = np.array(humidity)
+discomfort_index = 0.81 * T + 0.01* H * (0.99 * T -14.3) + 46.3
+discomfort_index_avg = str(int(np.mean(discomfort_index)))
+# print(discomfort_index_avg)
+print(f"不快指数：{discomfort_index_avg}")
+
+# 体感温度
+
+# htmlの書き換え
+html_file_path = "index.html"
+with open(html_file_path, "r") as file:
+	html_content = file.read()
+
+html_content = html_content.replace("{placeholder6}", discomfort_index_avg)
+
+with open(html_file_path, "w") as file:
+	file.write(html_content)
+
+
 # plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
