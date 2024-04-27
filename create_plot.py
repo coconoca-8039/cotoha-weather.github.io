@@ -130,8 +130,8 @@ T = np.array(tempture)
 H = np.array(humidity)
 discomfort_index = 0.81 * T + 0.01* H * (0.99 * T -14.3) + 46.3
 discomfort_index_avg = str(int(np.mean(discomfort_index)))
-# print(discomfort_index_avg)
-print(f"不快指数：{discomfort_index_avg}")
+discomfort_index_avg = f"不快指数：{discomfort_index_avg}"
+print(discomfort_index_avg)
 
 # 体感温度
 
