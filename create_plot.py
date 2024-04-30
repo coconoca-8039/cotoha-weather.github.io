@@ -98,12 +98,11 @@ print(HI_avg)
 plt.legend()
 
 # 体感温度
-# Missnardの計算式を摂氏に変換
-T = np.array(tempture)
+# Missnard
+T_M = np.array(tempture)
 H = np.array(humidity)
-T = T + 273.15
-# M = T - (1 / 2.3) * (T - 10) * (0.8 - (H / 100))
-M = T * (1 + 0.00366 * H)
+T_M= T_M+ 273.15
+M = T_M - (1 / 2.3) * (T_M - 10) * (0.8 - (H / 100))
 M = np.array(M) - 273.15
 print(M)
 
