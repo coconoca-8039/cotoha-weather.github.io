@@ -14,6 +14,12 @@ column_pressure = "Pressure"
 column_satelliteCount = "SatelliteCount"
 column_timestamp = "Timestamp"
 
+def celsius_to_fahrenheit(c):
+	return (c * (9 / 5)) + 32
+
+def fahrenheit_to_celsius(f):
+	return (f - 32) * 5 / 9
+
 def fetch_recent_data(db_path, table_name, column_name):
 	
 	# SQLiteデータベースに接続
@@ -85,27 +91,41 @@ plt.scatter(pm_x, pm_y, color='indigo', marker='o', label='PM Temperature')
 
 # 体感温度
 # George Winterling
-T = np.array(tempture)
+T = celsius_to_fahrenheit(np.array(tempture))
 H = np.array(humidity)
-HI = (-8.784695 + 1.61139411 * T + 2.338549 * H
-	- 0.14611605 * T * H - 0.012308094 * T**2
-	- 0.016424828 * H**2 + 0.002211732 * T**2 * H
-	+ 0.00072546 * T * H**2 - 0.000003582 * T**2 * H**2)
-plt.plot(x, HI, label='Humiture')
+
+# HI = (-8.784695 + 1.61139411 * T + 2.338549 * H
+	# - 0.14611605 * T * H - 0.012308094 * T**2
+	# - 0.016424828 * H**2 + 0.002211732 * T**2 * H
+	# + 0.00072546 * T * H**2 - 0.000003582 * T**2 * H**2)
+
+HI = (-42.379
+	+ 2.04901523 * T
+	+ 10.14333127 * H
+	- 0.22475541 * T * H
+	- 0.00683783 * T**2
+	- 0.05481717 * H**2
+	+ 0.00122874 * T**2 * H
+	+ 0.00085282 * T * H**2
+	- 0.00000199 * T**2 * H**2)
+	
+HI = fahrenheit_to_celsius(HI)
+plt.plot(x, HI, color='blue', label='Humiture by Winterling')
 HI_avg = str(int(np.mean(HI)))
-HI_avg = f"体感温度：{HI_avg}"
+HI_avg = f"体感温度1：{HI_avg}"
 print(HI_avg)
-plt.legend()
 
 # 体感温度
 # Missnard
-T_M = np.array(tempture)
+T = np.array(tempture)
 H = np.array(humidity)
-T_M= T_M+ 273.15
-M = T_M - (1 / 2.3) * (T_M - 10) * (0.8 - (H / 100))
-M = np.array(M) - 273.15
-print(M)
+M = T - (1 / 2.3) * (T - 10) * (0.8 - (H / 100))
+plt.plot(x, M, color='red', label='Humiture by Missnard')
+M_avg = str(int(np.mean(M)))
+M_avg = f"体感温度2：{M_avg}"
+print(M_avg)
 
+plt.legend()
 plt.savefig('/home/pi/Desktop/cotoha/cotoha-weather.github.io/image1.jpg')
 plt.clf()
 print('created image1')
