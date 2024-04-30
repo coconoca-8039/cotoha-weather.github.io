@@ -46,8 +46,9 @@ plt.tight_layout()
 # sns.set(style="whitegrid")
 sns.set()
 
-# 気温グラフの作成
+# 気温と体感温度グラフの作成
 tempture = fetch_recent_data(db_path, table_name, column_tempture)
+humidity = fetch_recent_data(db_path, table_name, column_humidity)
 new_timestamp = []
 timestamp = fetch_recent_data(db_path, table_name, column_timestamp)
 for date_str in timestamp:
@@ -77,11 +78,25 @@ for i, date in enumerate(x):
 	else:
 		pm_x.append(date)
 		pm_y.append(y[i])
-plt.scatter(am_x, am_y, color='chocolate', marker='o', label='AM')
-plt.scatter(pm_x, pm_y, color='indigo', marker='o', label='PM')
+plt.scatter(am_x, am_y, color='chocolate', marker='o', label='AM Temperature')
+plt.scatter(pm_x, pm_y, color='indigo', marker='o', label='PM Temperature')
  #plt.bar(am_x, am_y, color='chocolate', label='AM')
 # plt.bar(pm_x, pm_y, color='indigo', label='PM')
+
+# 体感温度
+T = np.array(tempture)
+H = np.array(humidity)
+HI = (-8.784695 + 1.61139411 * T + 2.338549 * H
+	- 0.14611605 * T * H - 0.012308094 * T**2
+	- 0.016424828 * H**2 + 0.002211732 * T**2 * H
+	+ 0.00072546 * T * H**2 - 0.000003582 * T**2 * H**2)
+plt.plot(x, HI, label='humiture')
+HI_avg = str(int(np.mean(HI)))
+HI_avg = f"体感温度：{HI_avg}"
+print(HI_avg)
+
 plt.legend()
+
 plt.savefig('/home/pi/Desktop/cotoha/cotoha-weather.github.io/image1.jpg')
 plt.clf()
 print('created image1')
@@ -132,8 +147,6 @@ discomfort_index = 0.81 * T + 0.01* H * (0.99 * T -14.3) + 46.3
 discomfort_index_avg = str(int(np.mean(discomfort_index)))
 discomfort_index_avg = f"不快指数：{discomfort_index_avg}"
 print(discomfort_index_avg)
-
-# 体感温度
 
 # htmlの書き換え
 html_file_path = "index.html"
