@@ -84,22 +84,33 @@ plt.scatter(pm_x, pm_y, color='indigo', marker='o', label='PM Temperature')
 # plt.bar(pm_x, pm_y, color='indigo', label='PM')
 
 # 体感温度
+# George Winterling
 T = np.array(tempture)
 H = np.array(humidity)
 HI = (-8.784695 + 1.61139411 * T + 2.338549 * H
 	- 0.14611605 * T * H - 0.012308094 * T**2
 	- 0.016424828 * H**2 + 0.002211732 * T**2 * H
 	+ 0.00072546 * T * H**2 - 0.000003582 * T**2 * H**2)
-plt.plot(x, HI, label='humiture')
+plt.plot(x, HI, label='Humiture')
 HI_avg = str(int(np.mean(HI)))
 HI_avg = f"体感温度：{HI_avg}"
 print(HI_avg)
-
 plt.legend()
+
+# 体感温度
+# Missnardの計算式を摂氏に変換
+T = np.array(tempture)
+H = np.array(humidity)
+T = T + 273.15
+# M = T - (1 / 2.3) * (T - 10) * (0.8 - (H / 100))
+M = T * (1 + 0.00366 * H)
+M = np.array(M) - 273.15
+print(M)
 
 plt.savefig('/home/pi/Desktop/cotoha/cotoha-weather.github.io/image1.jpg')
 plt.clf()
 print('created image1')
+
 
 # 湿度グラフの作成
 x = new_timestamp
@@ -114,6 +125,7 @@ plt.savefig('/home/pi/Desktop/cotoha/cotoha-weather.github.io/image2.jpg')
 plt.clf()
 print('created image2')
 
+
 # 気圧グラフの作成
 x = new_timestamp
 pressure = fetch_recent_data(db_path, table_name, column_pressure)
@@ -126,6 +138,7 @@ plt.grid(True)
 plt.savefig('/home/pi/Desktop/cotoha/cotoha-weather.github.io/image3.jpg')
 plt.clf()
 print('created image3')
+
 
 # 人工衛星の捕捉数グラフの作成
 x = new_timestamp
@@ -140,6 +153,7 @@ plt.savefig('/home/pi/Desktop/cotoha/cotoha-weather.github.io/image4.jpg')
 plt.clf()
 print('created image4')
 
+
 # 不快指数
 T = np.array(tempture)
 H = np.array(humidity)
@@ -147,6 +161,7 @@ discomfort_index = 0.81 * T + 0.01* H * (0.99 * T -14.3) + 46.3
 discomfort_index_avg = str(int(np.mean(discomfort_index)))
 discomfort_index_avg = f"不快指数：{discomfort_index_avg}"
 print(discomfort_index_avg)
+
 
 # htmlの書き換え
 html_file_path = "index.html"
