@@ -113,7 +113,7 @@ plt.plot(x, y,
 	markerfacecolor='red')
 	# markeredgecolor='red')
 	
-am_x, am_y, pm_x, pm_y = [], [], []. []
+am_x, am_y, pm_x, pm_y = [], [], [], []
 for i, date in enumerate(x):
 	if date.hour < 12:
 		am_x.append(date)
