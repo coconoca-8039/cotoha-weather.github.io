@@ -123,15 +123,13 @@ for i, date in enumerate(x):
 		pm_y.append(y[i])
 plt.scatter(am_x, am_y, color='chocolate', marker='o', label='AM Temperature')
 plt.scatter(pm_x, pm_y, color='indigo', marker='o', label='PM Temperature')
- #plt.bar(am_x, am_y, color='chocolate', label='AM')
-# plt.bar(pm_x, pm_y, color='indigo', label='PM')
 
-# 体感温度 George Winterling
+# 体感温度 HeatIndex George Winterling
 T = celsius_to_fahrenheit(np.array(tempture))
 H = np.array(humidity)
 HI = calc_winterling_index(T, H)
 HI = fahrenheit_to_celsius(HI)
-plt.plot(x, HI, color='blue', label='Humiture by Winterling')
+plt.plot(x, HI, color='blue', label='Humiture by Heat Index')
 HI_avg = str(int(np.mean(HI)))
 print(f"Winterling：{HI_avg}")
 
