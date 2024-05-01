@@ -19,6 +19,22 @@ def celsius_to_fahrenheit(c):
 
 def fahrenheit_to_celsius(f):
 	return (f - 32) * 5 / 9
+	
+def calc_missnard_index(T, H):
+	M = T - (1 / 2.3) * (T - 10) * (0.8 - (H / 100))
+	return M
+
+def calc_winterling_index(T, H):
+	HI = (-42.379
+		+ 2.04901523 * T
+		+ 10.14333127 * H
+		- 0.22475541 * T * H
+		- 0.00683783 * T**2
+		- 0.05481717 * H**2
+		+ 0.00122874 * T**2 * H
+		+ 0.00085282 * T * H**2
+		- 0.00000199 * T**2 * H**2)
+	return HI
 
 def fetch_recent_data(db_path, table_name, column_name):
 	
@@ -49,7 +65,6 @@ def fetch_recent_data(db_path, table_name, column_name):
 plt.figure(figsize=(10, 10))
 plt.rcParams.update({'font.size':15})	
 plt.tight_layout()
-# sns.set(style="whitegrid")
 sns.set()
 
 # 気温と体感温度グラフの作成
@@ -64,7 +79,6 @@ for date_str in timestamp:
 
 x = new_timestamp
 y = tempture
-# plt.title('temperature')
 plt.xticks(rotation=20)
 plt.ylabel('temperature[℃]')
 plt.grid(True)
@@ -89,42 +103,24 @@ plt.scatter(pm_x, pm_y, color='indigo', marker='o', label='PM Temperature')
  #plt.bar(am_x, am_y, color='chocolate', label='AM')
 # plt.bar(pm_x, pm_y, color='indigo', label='PM')
 
-# 体感温度
-# George Winterling
+# 体感温度 George Winterling
 T = celsius_to_fahrenheit(np.array(tempture))
 H = np.array(humidity)
-
-# HI = (-8.784695 + 1.61139411 * T + 2.338549 * H
-	# - 0.14611605 * T * H - 0.012308094 * T**2
-	# - 0.016424828 * H**2 + 0.002211732 * T**2 * H
-	# + 0.00072546 * T * H**2 - 0.000003582 * T**2 * H**2)
-
-HI = (-42.379
-	+ 2.04901523 * T
-	+ 10.14333127 * H
-	- 0.22475541 * T * H
-	- 0.00683783 * T**2
-	- 0.05481717 * H**2
-	+ 0.00122874 * T**2 * H
-	+ 0.00085282 * T * H**2
-	- 0.00000199 * T**2 * H**2)
-	
+HI = calc_winterling_index(T, H)
 HI = fahrenheit_to_celsius(HI)
 plt.plot(x, HI, color='blue', label='Humiture by Winterling')
 HI_avg = str(int(np.mean(HI)))
-HI_avg = f"体感温度1：{HI_avg}"
-print(HI_avg)
+print(f"体感温度1：{HI_avg}")
 
-# 体感温度
-# Missnard
+# 体感温度 Missnard
 T = np.array(tempture)
 H = np.array(humidity)
-M = T - (1 / 2.3) * (T - 10) * (0.8 - (H / 100))
+M = calc_missnard_index(T, H)	
 plt.plot(x, M, color='red', label='Humiture by Missnard')
 M_avg = str(int(np.mean(M)))
-M_avg = f"体感温度2：{M_avg}"
-print(M_avg)
+print(f"体感温度2：{M_avg}")
 
+#  グラフ最終処理
 plt.legend()
 plt.savefig('/home/pi/Desktop/cotoha/cotoha-weather.github.io/image1.jpg')
 plt.clf()
