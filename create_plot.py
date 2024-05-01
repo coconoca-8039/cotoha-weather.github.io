@@ -126,7 +126,6 @@ plt.savefig('/home/pi/Desktop/cotoha/cotoha-weather.github.io/image1.jpg')
 plt.clf()
 print('created image1')
 
-
 # 湿度グラフの作成
 x = new_timestamp
 humidity = fetch_recent_data(db_path, table_name, column_humidity)
@@ -139,7 +138,6 @@ plt.grid(True)
 plt.savefig('/home/pi/Desktop/cotoha/cotoha-weather.github.io/image2.jpg')
 plt.clf()
 print('created image2')
-
 
 # 気圧グラフの作成
 x = new_timestamp
@@ -154,7 +152,6 @@ plt.savefig('/home/pi/Desktop/cotoha/cotoha-weather.github.io/image3.jpg')
 plt.clf()
 print('created image3')
 
-
 # 人工衛星の捕捉数グラフの作成
 x = new_timestamp
 satellite_count = fetch_recent_data(db_path, table_name, column_satelliteCount)
@@ -168,7 +165,6 @@ plt.savefig('/home/pi/Desktop/cotoha/cotoha-weather.github.io/image4.jpg')
 plt.clf()
 print('created image4')
 
-
 # 不快指数
 T = np.array(tempture)
 H = np.array(humidity)
@@ -176,7 +172,6 @@ discomfort_index = 0.81 * T + 0.01* H * (0.99 * T -14.3) + 46.3
 discomfort_index_avg = str(int(np.mean(discomfort_index)))
 discomfort_index_avg = f"不快指数：{discomfort_index_avg}"
 print(discomfort_index_avg)
-
 
 # htmlの書き換え
 html_file_path = "index.html"
