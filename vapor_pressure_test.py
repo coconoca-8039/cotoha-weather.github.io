@@ -1,4 +1,4 @@
-import math
+import numpy as np
 
 T = 10  # 摂氏
 RH = 77  # 相対湿度
@@ -9,7 +9,7 @@ def calc_dew_point(T, RH):
 	# 露点温度の算出
 	b = 17.62
 	c = 243.12
-	gamma = (b * T / (c + T)) + math.log(RH / 100.0)
+	gamma = (b * T / (c + T)) + np.log(RH / 100.0)
 	T_dew = (c * gamma) / (b - gamma)
 	return T_dew
 
