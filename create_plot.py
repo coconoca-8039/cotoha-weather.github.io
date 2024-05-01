@@ -36,6 +36,26 @@ def calc_winterling_index(T, H):
 		- 0.00000199 * T**2 * H**2)
 	return HI
 
+def calc_dew_point(T, RH):
+	# 露点温度の算出
+	b = 17.62
+	c = 243.12
+	gamma = (b * T / (c + T)) + np.log(RH / 100.0)
+	T_dew = (c * gamma) / (b - gamma)
+	return T_dew
+
+def calc_saturation_vapor_pressure(T_dew):
+	# 露点温度を引数にして水蒸気圧を算出
+	e = 6.1078 * 10 ** (7.5 * T_dew /(237.3 + T_dew))
+	return e
+
+def calc_humidex(T, e):
+	# カナダ気象局(MSC)
+	humidex = T + 0.5555 * (e - 10)
+	#humidex = np.floor(humidex)
+	#humidex = humidex.astype(int)
+	return humidex
+
 def fetch_recent_data(db_path, table_name, column_name):
 	
 	# SQLiteデータベースに接続
@@ -69,6 +89,9 @@ sns.set()
 
 # 気温と体感温度グラフの作成
 tempture = fetch_recent_data(db_path, table_name, column_tempture)
+temperature_avg = np.array(tempture)
+temperature_avg = np.mean(temperature_avg)
+print(f"実測温度：{np.floor(temperature_avg)}")
 humidity = fetch_recent_data(db_path, table_name, column_humidity)
 new_timestamp = []
 timestamp = fetch_recent_data(db_path, table_name, column_timestamp)
@@ -110,7 +133,7 @@ HI = calc_winterling_index(T, H)
 HI = fahrenheit_to_celsius(HI)
 plt.plot(x, HI, color='blue', label='Humiture by Winterling')
 HI_avg = str(int(np.mean(HI)))
-print(f"体感温度1：{HI_avg}")
+print(f"Winterling：{HI_avg}")
 
 # 体感温度 Missnard
 T = np.array(tempture)
@@ -118,7 +141,21 @@ H = np.array(humidity)
 M = calc_missnard_index(T, H)	
 plt.plot(x, M, color='red', label='Humiture by Missnard')
 M_avg = str(int(np.mean(M)))
-print(f"体感温度2：{M_avg}")
+print(f"Missnard：{M_avg}")
+
+# 体感温度 カナダ気象局
+T = np.array(tempture)
+RH = np.array(humidity)
+dew_point = calc_dew_point(T, RH)
+# print(f"露点温度：{dew_point}")
+e = calc_saturation_vapor_pressure(dew_point)
+# print(f"水蒸気圧：{e}")
+humidex = calc_humidex(T, e)
+# print(f"体感温度：{humidex}")
+humidex_avg = np.mean(humidex)
+humidex_avg = np.floor(humidex_avg)
+plt.plot(x, humidex, color='black', label='Humiture by MSC(Canada)')
+print(f"Canada：{humidex_avg}")
 
 #  グラフ最終処理
 plt.legend()
