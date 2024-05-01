@@ -1,7 +1,7 @@
 import numpy as np
 
-T = 10  # 摂氏
-RH = 77  # 相対湿度
+T = np.array([10, 15, 20, 25])  # 摂氏
+RH = np.array([20, 40, 60, 80])  # 相対湿度
 
 print(f"温度：{T}")
 
@@ -21,7 +21,8 @@ def calc_saturation_vapor_pressure(T_dew):
 def calc_humidex(T, e):
 	# カナダ気象局(MSC)
 	humidex = T + 0.5555 * (e - 10)
-	humidex = int(humidex)
+	humidex = np.floor(humidex)
+	humidex = humidex.astype(int)
 	return humidex
 
 dew_point = calc_dew_point(T, RH)
