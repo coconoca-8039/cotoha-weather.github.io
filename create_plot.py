@@ -37,6 +37,7 @@ def calc_winterling_index(T, H):
 	return HI
 
 def calc_dew_point(T, RH):
+	# マグヌス式
 	# 露点温度の算出
 	b = 17.62
 	c = 243.12
@@ -45,6 +46,7 @@ def calc_dew_point(T, RH):
 	return T_dew
 
 def calc_saturation_vapor_pressure(T_dew):
+	# テトンスの式
 	# 露点温度を引数にして水蒸気圧を算出
 	e = 6.1078 * 10 ** (7.5 * T_dew /(237.3 + T_dew))
 	return e
@@ -110,10 +112,8 @@ plt.plot(x, y,
 	# linestyle='None',
 	markerfacecolor='red')
 	# markeredgecolor='red')
-am_x = []
-am_y = []
-pm_x = []
-pm_y = []
+	
+am_x, am_y, pm_x, pm_y = [], [], []. []
 for i, date in enumerate(x):
 	if date.hour < 12:
 		am_x.append(date)
