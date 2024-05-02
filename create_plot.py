@@ -18,7 +18,7 @@ def celsius_to_fahrenheit(c):
 	return (c * (9 / 5)) + 32
 
 def fahrenheit_to_celsius(f):
-	return (f - 32) * 5 / 9
+	return (f - 32) * (5 / 9)
 	
 def calc_missnard_index(T, H):
 	M = T - (1 / 2.3) * (T - 10) * (0.8 - (H / 100))
