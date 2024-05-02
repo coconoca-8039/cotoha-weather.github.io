@@ -59,30 +59,35 @@ def calc_humidex(T, e):
 	return humidex
 
 def fetch_recent_data(db_path, table_name, column_name):
-	
-	# SQLiteデータベースに接続
-	con = sqlite3.connect(db_path)
-	cursor = con.cursor()
-	
-	# 最新データを参照
-	# query = f"SELECT * FROM {table_name} ORDER BY Timestamp DESC LIMIT {limit}"
-	query = f"SELECT {column_name} FROM {table_name} ORDER BY rowid DESC LIMIT 168"
-	cursor.execute(query)
-	
-	# 結果をリストに格納
-	# recent_data = cursor.fetchall()
-	#data_list = [float(row[0]) for row in cursor.fetchall()]
-	data_list = []
-	for row in cursor.fetchall():
-		if column_name != column_timestamp:
-			data = float(row[0])
-			data_list.append(data)
-		else:
-			data_list.append(row[0])
-	
-	con.close()
-	
-	return data_list
+	try:
+		# SQLiteデータベースに接続
+		con = sqlite3.connect(db_path)
+		cursor = con.cursor()
+		
+		# 最新データを参照
+		# query = f"SELECT * FROM {table_name} ORDER BY Timestamp DESC LIMIT {limit}"
+		query = f"SELECT {column_name} FROM {table_name} ORDER BY rowid DESC LIMIT 168"
+		cursor.execute(query)
+		
+		# 結果をリストに格納
+		# recent_data = cursor.fetchall()
+		#data_list = [float(row[0]) for row in cursor.fetchall()]
+		data_list = []
+		for row in cursor.fetchall():
+			if column_name != column_timestamp:
+				data = float(row[0])
+				data_list.append(data)
+			else:
+				data_list.append(row[0])
+		
+		con.close()
+		
+		return data_list
+		
+	except Exception as e:
+		print(f"データの取得中にエラーが発生しました：{e}")
+		return []
+		
 
 plt.figure(figsize=(10, 10))
 plt.rcParams.update({'font.size':15})	
