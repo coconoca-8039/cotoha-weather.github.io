@@ -121,6 +121,7 @@ for i, date in enumerate(x):
 	else:
 		pm_x.append(date)
 		pm_y.append(y[i])
+		
 plt.scatter(am_x, am_y, color='chocolate', marker='o', label='AM Temperature')
 plt.scatter(pm_x, pm_y, color='indigo', marker='o', label='PM Temperature')
 
