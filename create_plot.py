@@ -66,7 +66,8 @@ def fetch_recent_data(db_path, table_name, column_name):
 		
 		# 最新データを参照
 		# query = f"SELECT * FROM {table_name} ORDER BY Timestamp DESC LIMIT {limit}"
-		query = f"SELECT {column_name} FROM {table_name} ORDER BY rowid DESC LIMIT 168"
+		# query = f"SELECT {column_name} FROM {table_name} ORDER BY rowid DESC LIMIT 168"
+		query = f"SELECT {column_name} FROM {table_name} ORDER BY rowid DESC LIMIT 400"
 		cursor.execute(query)
 		
 		# 結果をリストに格納
@@ -135,7 +136,7 @@ T_heatindex = celsius_to_fahrenheit(np.array(tempture))
 H = np.array(humidity)
 HI = calc_winterling_index(T_heatindex, H)
 HI = fahrenheit_to_celsius(HI)
-plt.plot(x, HI, color='blue', label='Humiture by Heat Index')
+# plt.plot(x, HI, color='blue', label='Humiture by Heat Index')
 HI_avg = str(int(np.mean(HI)))
 print(f"Winterling：{HI_avg}")
 
@@ -175,6 +176,11 @@ y = humidity
 plt.plot(x,y)
 plt.xticks(rotation=20)
 plt.ylabel('humidity[%]')
+# 湿度の近似曲線
+humi_coefficients = np.polyfit(x, y, 2)
+p = np.polyid(humi_coefficients)
+plt.plot(x, p(x), color='red')
+
 plt.grid(True)
 plt.savefig('/home/pi/Desktop/cotoha/cotoha-weather.github.io/image2.jpg')
 plt.clf()
