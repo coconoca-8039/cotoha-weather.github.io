@@ -131,9 +131,9 @@ plt.scatter(am_x, am_y, color='chocolate', marker='o', label='AM Temperature')
 plt.scatter(pm_x, pm_y, color='indigo', marker='o', label='PM Temperature')
 
 # 体感温度 HeatIndex George Winterling
-T = celsius_to_fahrenheit(np.array(tempture))
+T_heatindex = celsius_to_fahrenheit(np.array(tempture))
 H = np.array(humidity)
-HI = calc_winterling_index(T, H)
+HI = calc_winterling_index(T_heatindex, H)
 HI = fahrenheit_to_celsius(HI)
 plt.plot(x, HI, color='blue', label='Humiture by Heat Index')
 HI_avg = str(int(np.mean(HI)))
