@@ -88,12 +88,14 @@ def fetch_recent_data(db_path, table_name, column_name):
 	except Exception as e:
 		print(f"データの取得中にエラーが発生しました：{e}")
 		return []
-		
 
+		
+# sns.set(style="darkgrid")
+# sns.set_style("dark")
 plt.figure(figsize=(10, 10))
-plt.rcParams.update({'font.size':15})	
-plt.tight_layout()
-sns.set()
+# plt.rcParams.update({'font.size':15})
+# plt.rcParams['figure.facecolor'] = 'black'
+# plt.tight_layout()
 
 # 気温と体感温度グラフの作成
 tempture = fetch_recent_data(db_path, table_name, column_tempture)
@@ -116,6 +118,7 @@ plt.grid(True)
 plt.plot(x, y, 
 	# marker='o', 
 	# linestyle='None',
+	linewidth=3,
 	markerfacecolor='red')
 	# markeredgecolor='red')
 	
@@ -144,7 +147,7 @@ print(f"Winterling：{HI_avg}")
 T = np.array(tempture)
 H = np.array(humidity)
 M = calc_missnard_index(T, H)	
-plt.plot(x, M, color='red', label='Humiture by Missnard')
+plt.plot(x, M, color='red', linewidth=4, label='Humiture by Missnard')
 M_avg = str(int(np.mean(M)))
 print(f"Missnard：{M_avg}")
 
@@ -159,7 +162,7 @@ humidex = calc_humidex(T, e)
 # print(f"体感温度：{humidex}")
 humidex_avg = np.mean(humidex)
 humidex_avg = np.floor(humidex_avg)
-plt.plot(x, humidex, color='black', label='Humiture by MSC(Canada)')
+plt.plot(x, humidex, color='yellow', linewidth=4, label='Humiture by MSC(Canada)')
 print(f"Canada：{humidex_avg}")
 
 #  グラフ最終処理
