@@ -162,7 +162,7 @@ humidex = calc_humidex(T, e)
 # print(f"体感温度：{humidex}")
 humidex_avg = np.mean(humidex)
 humidex_avg = np.floor(humidex_avg)
-plt.plot(x, humidex, color='yellow', linewidth=4, label='Humiture by MSC(Canada)')
+plt.plot(x, humidex, color='blue', linewidth=4, label='Humiture by MSC(Canada)')
 print(f"Canada：{humidex_avg}")
 
 #  グラフ最終処理
