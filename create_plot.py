@@ -176,7 +176,7 @@ x = new_timestamp
 humidity = fetch_recent_data(db_path, table_name, column_humidity)
 y = humidity
 # plt.title('humidity')
-plt.plot(x,y)
+plt.plot(x, y, color='blue', linewidth=4)
 plt.xticks(rotation=20)
 plt.ylabel('humidity[%]')
 # 湿度の近似曲線
@@ -198,7 +198,7 @@ x = new_timestamp
 pressure = fetch_recent_data(db_path, table_name, column_pressure)
 y = pressure
 # plt.title('pressure')
-plt.plot(x,y)
+plt.plot(x, y, color='blue', linewidth=4)
 plt.xticks(rotation=20)
 plt.ylabel('pressure[hPa]')
 plt.grid(True)
@@ -211,7 +211,7 @@ x = new_timestamp
 satellite_count = fetch_recent_data(db_path, table_name, column_satelliteCount)
 y = satellite_count
 # plt.title('satellite_count')
-plt.plot(x,y)
+plt.plot(x, y, color='blue', linewidth=4)
 plt.xticks(rotation=20)
 plt.ylabel('satellite_count')
 plt.grid(True)
