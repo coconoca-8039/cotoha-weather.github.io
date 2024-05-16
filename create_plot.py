@@ -67,7 +67,7 @@ def fetch_recent_data(db_path, table_name, column_name):
 		# 最新データを参照
 		# query = f"SELECT * FROM {table_name} ORDER BY Timestamp DESC LIMIT {limit}"
 		# query = f"SELECT {column_name} FROM {table_name} ORDER BY rowid DESC LIMIT 168"
-		query = f"SELECT {column_name} FROM {table_name} ORDER BY rowid DESC LIMIT 600"
+		query = f"SELECT {column_name} FROM {table_name} ORDER BY rowid DESC LIMIT 480"
 		cursor.execute(query)
 		
 		# 結果をリストに格納
@@ -91,7 +91,7 @@ def fetch_recent_data(db_path, table_name, column_name):
 
 		
 # sns.set(style="darkgrid")
-# sns.set_style("dark")
+sns.set_style("dark")
 plt.figure(figsize=(10, 10))
 # plt.rcParams.update({'font.size':15})
 # plt.rcParams['figure.facecolor'] = 'black'
@@ -118,9 +118,12 @@ plt.grid(True)
 plt.plot(x, y, 
 	# marker='o', 
 	# linestyle='None',
-	linewidth=3,
-	markerfacecolor='red')
+	linewidth=4,
+	color='blue',
+	label='Temperature'
+	# markerfacecolor='red')
 	# markeredgecolor='red')
+	)
 	
 am_x, am_y, pm_x, pm_y = [], [], [], []
 for i, date in enumerate(x):
@@ -131,8 +134,8 @@ for i, date in enumerate(x):
 		pm_x.append(date)
 		pm_y.append(y[i])
 		
-plt.scatter(am_x, am_y, color='chocolate', marker='o', label='AM Temperature')
-plt.scatter(pm_x, pm_y, color='indigo', marker='o', label='PM Temperature')
+# plt.scatter(am_x, am_y, color='chocolate', marker='o', label='AM Temperature')
+# plt.scatter(pm_x, pm_y, color='indigo', marker='o', label='PM Temperature')
 
 # 体感温度 HeatIndex George Winterling
 T_heatindex = celsius_to_fahrenheit(np.array(tempture))
@@ -147,7 +150,7 @@ print(f"Winterling：{HI_avg}")
 T = np.array(tempture)
 H = np.array(humidity)
 M = calc_missnard_index(T, H)	
-plt.plot(x, M, color='red', linewidth=4, label='Humiture by Missnard')
+plt.plot(x, M, color='red', linewidth=2, label='Humiture by Missnard')
 M_avg = str(int(np.mean(M)))
 print(f"Missnard：{M_avg}")
 
@@ -162,7 +165,7 @@ humidex = calc_humidex(T, e)
 # print(f"体感温度：{humidex}")
 humidex_avg = np.mean(humidex)
 humidex_avg = np.floor(humidex_avg)
-plt.plot(x, humidex, color='blue', linewidth=4, label='Humiture by MSC(Canada)')
+plt.plot(x, humidex, color='black', linewidth=2, label='Humiture by MSC(Canada)')
 print(f"Canada：{humidex_avg}")
 
 #  グラフ最終処理
