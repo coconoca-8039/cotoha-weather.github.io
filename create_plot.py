@@ -223,9 +223,11 @@ plt.clf()
 print('created image4')
 
 # 不快指数
-T = np.array(tempture)
-H = np.array(humidity)
-discomfort_index = 0.81 * T + 0.01* H * (0.99 * T -14.3) + 46.3
+Td = np.array(tempture)
+print(Td)
+Hd = np.array(humidity)
+discomfort_index = 0.81 * Td + 0.01* Hd * (0.99 * Td -14.3) + 46.3
+# print(discomfort_index)
 discomfort_index_avg = str(int(np.mean(discomfort_index)))
 discomfort_index_avg = f"不快指数：{discomfort_index_avg}"
 print(discomfort_index_avg)
